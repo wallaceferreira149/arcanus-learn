@@ -20,8 +20,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username)
-            .map(AuthenticatedUser::new)
-            .orElseThrow(() -> new UsernameNotFoundException("Usuário ou senha incorreto."));
+                .map(AuthenticatedUser::new)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário ou senha não encontrados."));
     }
-    
+
 }

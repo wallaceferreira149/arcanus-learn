@@ -31,22 +31,22 @@ public class JwtService {
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("Usuário não encontrado.");
         }
-        
+
         Instant now = Instant.now();
         long expiration = 360L;
         String scopes = authentication.getAuthorities().stream()
-            .map(GrantedAuthority::getAuthority)
-            .collect(Collectors.joining(" "));
-        
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(" "));
+
         var claims = JwtClaimsSet.builder()
-            .issuer("arcanus-learning")
-            .issuedAt(now)
-            .expiresAt(now.plusSeconds(expiration))
-            .subject(user.get().getId().toString())
-            .claim("scopes", scopes)
-            .build();
+                .issuer("arcanus-learning")
+                .issuedAt(now)
+                .expiresAt(now.plusSeconds(expiration))
+                .subject(user.get().getId().toString())
+                .claim("scopes", scopes)
+                .build();
 
         return encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
-    
+
 }

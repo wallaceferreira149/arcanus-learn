@@ -1,6 +1,7 @@
 package dev.arcanus.api.auth.entities;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,9 +13,10 @@ public class AuthenticatedUser implements UserDetails {
     public AuthenticatedUser(User user) {
         this.user = user;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return List.of(() -> "read");
     }
 
     @Override
@@ -26,5 +28,5 @@ public class AuthenticatedUser implements UserDetails {
     public String getUsername() {
         return user.getEmail();
     }
-    
+
 }
